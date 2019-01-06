@@ -15,7 +15,7 @@ export class PeopleTableComponent implements OnInit {
   constructor(personApi : PersonService) { }
 
   ngOnInit() {
-
+    
   }
 
 }

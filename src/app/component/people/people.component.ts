@@ -1,23 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { PersonService } from '../../service/person.service';
-import { Person } from '../../model/Person';
-
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { AddPersonDialogComponent } from "../add-person-dialog/add-person-dialog.component";
 @Component({
   selector: 'app-people',
   templateUrl: './people.component.html',
   styleUrls: ['./people.component.scss']
 })
 export class PeopleComponent implements OnInit {
-  private people : Person[] = new Array<Person>();
+  public view = "table";
 
-  public table: boolean = true;
+  constructor(public dialog: MatDialog) { }
 
-  constructor(public peopleAPI: PersonService) { }
+  ngOnInit() { }
 
-  ngOnInit() {
-    this.peopleAPI.getPeople(this.people); 
+  /**
+   * Opens add person dialog
+   */
+  public addPerson(){
+    const dialogRef = this.dialog.open(AddPersonDialogComponent, {
+      width: '600px',
+      data: null
+    });
   }
-
-
 
 }

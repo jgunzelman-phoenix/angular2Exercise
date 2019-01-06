@@ -1,1 +1,21 @@
-<mat-toolbar color="primary">Person API</mat-toolbar>
+<mat-toolbar color="primary">
+    <span>Person API</span>
+    <span class="spacer"></span>
+    <mat-form-field class="viewSelector">
+        <mat-select [(value)]="view">
+            <mat-option value="table">
+                <span>Table</span>
+            </mat-option>
+            <mat-option value="card">
+                <span>Card</span>
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-mini-fab (click)="addPerson()"> 
+        <mat-icon>add</mat-icon>
+    </button>
+</mat-toolbar>
+<!-- card view -->
+<app-people-card *ngIf="view == 'card'"></app-people-card>
+<!-- table view -->
+<app-people-table *ngIf="view == 'table'"></app-people-table>
