@@ -39,11 +39,9 @@ export class AddPersonDialogComponent implements OnInit {
       this.ssnController = new FormControl(this.data.id, [Validators.required])
       this.fnController = new FormControl(this.data.firstName, [Validators.required])
       this.lnController = new FormControl(this.data.lastName, [Validators.required])
-      var dob = new Date();
-      dob.setUTCMilliseconds(this.data.dob.valueOf());
-      this.dobController = new FormControl(dob, [Validators.required])
-      this.hController = new FormControl(0, [Validators.required])
-      this.hcController = new FormControl('', [Validators.required])
+      this.dobController = new FormControl(new Date(this.data.dob.valueOf()), [Validators.required])
+      this.hController = new FormControl(this.data.heightInInches, [Validators.required])
+      this.hcController = new FormControl(this.data.hairColor, [Validators.required])
     }
   }
 
@@ -67,7 +65,7 @@ export class AddPersonDialogComponent implements OnInit {
       this.data.heightInInches = this.hController.value;
 
       var dob: Date = this.dobController.value;
-      this.data.dob = dob.getUTCMilliseconds();
+      this.data.dob = dob.getTime();
       //call api
       this.personApi.addPerson(this.data).subscribe(
         (data) => {
@@ -95,7 +93,7 @@ export class AddPersonDialogComponent implements OnInit {
       this.data.hairColor = this.hcController.value;
       this.data.heightInInches = this.hController.value;
       var dob: Date = this.dobController.value;
-      this.data.dob = dob.getUTCMilliseconds();
+      this.data.dob = dob.getTime();
       this.personApi.updatePerson(this.data).subscribe(
         (data) => {
           this.dialogRef.close();

@@ -1,0 +1,31 @@
+<div class="card-container">
+    <mat-card class="person-card" *ngFor="let person of people">
+        <mat-toolbar color="accent">
+            <button mat-mini-fab color="primary">
+                <mat-icon>person</mat-icon>
+            </button>
+            <span style="margin-left: 8px">{{person.firstName + ' ' + person.lastName}}</span>
+            <div class="spacer"></div>
+            <button mat-mini-fab color="primary" (click)="updatePerson(person)">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-mini-fab style="margin-left: 8px" color="primary" (click)="removePerson(person)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-toolbar>
+        <table class="personDetails">
+            <tr>
+                <td class="cell">SSN</td>
+                <td class="cell">{{person.id}}</td>
+                <td class="cell">Height</td>
+                <td class="cell">{{person.heightInInches}}in</td>
+            </tr>
+            <tr>
+                <td class="cell">DOB</td>
+                <td class="cell">{{formatDate(person.dob)}}</td>
+                <td class="cell">Hair Color</td>
+                <td class="cell">{{person.hairColor}}</td>
+            </tr>
+        </table>
+    </mat-card>
+</div>

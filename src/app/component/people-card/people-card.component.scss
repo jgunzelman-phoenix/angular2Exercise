@@ -1,0 +1,22 @@
+@import "../../app.component.scss";
+
+.card-container{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.person-card{
+    padding: 0px;
+    margin: 5px;
+    width: calc(33% - 15px);
+}
+
+.personDetails{
+    width: 100%;
+    padding: 8px;
+}
+
+.cell{
+    padding: 10px;
+}
+

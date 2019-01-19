@@ -1,7 +1,8 @@
-import { Component, OnInit,  Output, EventEmitter, SystemJsNgModuleLoader } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { MatTableDataSource, MatDialog } from '@angular/material';
 import { Person } from '../../model/Person';
 import { PersonService } from '../../service/person.service';
+import { AddPersonDialogComponent } from '../../component/add-person-dialog/add-person-dialog.component';
 import { timer } from "rxjs";
 
 @Component({
@@ -16,12 +17,20 @@ export class PeopleTableComponent implements OnInit {
 
   public people : Person[] = new Array<Person>();
 
+  @Input("addPerson")
+  addPerson$ : EventEmitter<Person>;
+
   @Output()
   update = new EventEmitter<Person>();
 
-  constructor(public peopleAPI: PersonService) { }
+  constructor(public peopleAPI: PersonService, public dialog: MatDialog) { }
   ngOnInit() {
     this.startAutoRefresh();
+    this.addPerson$.subscribe(
+      (data : Person) => {
+        this.pullData();
+      }
+    )
   }
 
   public startAutoRefresh(){
@@ -41,14 +50,21 @@ export class PeopleTableComponent implements OnInit {
         this.tableData = new MatTableDataSource<Person>(this.people);
       }
     )
-  } 
+  }
+
+  public formatDate(milli : Number) : String{
+    var date : Date = new Date(milli.valueOf());  
+    return date.toDateString();
+  }
 
   /**
    * Removes a person button 
    * @param person 
    */
   public removePerson(person : Person){
-    this.peopleAPI.removePerson(person);
+    this.peopleAPI.removePerson(person).subscribe(
+      (data)=>this.pullData()
+    );
   }
 
   /**
@@ -56,8 +72,19 @@ export class PeopleTableComponent implements OnInit {
    * @param person 
    */
   public updatePerson(person : Person){
-    //call back to send it to parent component
-    this.update.emit(person);
+    const dialogRef = this.dialog.open(AddPersonDialogComponent, {
+      width: '1000px',
+      data: person
+    });
+
+    dialogRef.afterClosed().subscribe(
+      result => {
+          this.addPerson$.emit(result);
+      }
+    )
+    this.peopleAPI.updatePerson(person).subscribe(
+      (data) => this.pullData()
+    );
   }
 
 }

@@ -11,11 +11,15 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
+    <button mat-raised-button class="deleteAll" (click)="deleteAll()" color="accent">
+        <mat-icon>delete</mat-icon>
+        <span>All</span>
+    </button>
     <button mat-mini-fab (click)="addPerson()"> 
-        <mat-icon>add</mat-icon>
+        <mat-icon>person_add</mat-icon>
     </button>
 </mat-toolbar>
 <!-- card view -->
-<app-people-card *ngIf="view === 'card'" class="people"></app-people-card>
+<app-people-card *ngIf="view === 'card'" class="people" [addPerson]="addPerson$"></app-people-card>
 <!-- table view -->
-<app-people-table *ngIf="view === 'table'" class="people"></app-people-table>
+<app-people-table *ngIf="view === 'table'" class="people" [addPerson]="addPerson$"></app-people-table>

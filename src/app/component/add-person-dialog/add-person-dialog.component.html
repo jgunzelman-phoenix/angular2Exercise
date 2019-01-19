@@ -69,7 +69,7 @@
     <mat-icon style="margin-right: 8px">add</mat-icon>
     <span>Add</span>
   </button>
-  <button mat-raised-button color="primary" style="margin-right: 8px" *ngIf="update" (click)="updatePerson()">
+  <button mat-raised-button color="primary" style="margin-right: 8px" *ngIf="update" (click)="updatePerson()" [mat-dialog-close]="this.data">
     <mat-icon style="margin-right: 8px">save</mat-icon>
     <span>Save</span>
   </button>
