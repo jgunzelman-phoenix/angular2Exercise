@@ -13,11 +13,18 @@ import {
   MatIconModule,
   MatButtonModule,
   MatTableModule,
-  MatDialogModule
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatCardModule
 } from '@angular/material';
 import { PeopleCardComponent } from './component/people-card/people-card.component';
 import { AddPersonDialogComponent } from './component/add-person-dialog/add-person-dialog.component'
 import { PersonService } from './service/person.service';
+import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [  //components you create go here
@@ -25,7 +32,8 @@ import { PersonService } from './service/person.service';
     PeopleComponent,
     PeopleTableComponent,
     PeopleCardComponent,
-    AddPersonDialogComponent
+    AddPersonDialogComponent,
+    ConfirmationDialogComponent
   ],
   imports: [ // 3rd party or library components go here
     BrowserModule,
@@ -36,7 +44,14 @@ import { PersonService } from './service/person.service';
     MatIconModule,
     MatButtonModule,
     MatTableModule,
-    MatDialogModule
+    MatCardModule,
+    
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule
   ],
   entryComponents: [AddPersonDialogComponent], // dialogs need to be defined are entry components since they are dynamically generated
   providers: [PersonService], //Services you wish to use go here.  Creates a single instance to be shared. Can be refrenced from a contructor of any angular component or service

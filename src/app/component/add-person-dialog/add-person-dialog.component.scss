@@ -1,2 +1,18 @@
 @import "../../app.component.scss";
 
+.add-person-table{
+    width: 100%
+}
+
+.input-person{
+    width: 100%;
+}
+
+.cell{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.error{
+    margin-top: 5px;
+}

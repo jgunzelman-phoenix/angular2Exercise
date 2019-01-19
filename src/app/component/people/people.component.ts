@@ -18,7 +18,7 @@ export class PeopleComponent implements OnInit {
    */
   public addPerson(){
     const dialogRef = this.dialog.open(AddPersonDialogComponent, {
-      width: '600px',
+      width: '1000px',
       data: null
     });
   }

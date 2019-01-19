@@ -16,6 +16,6 @@
     </button>
 </mat-toolbar>
 <!-- card view -->
-<app-people-card *ngIf="view == 'card'"></app-people-card>
+<app-people-card *ngIf="view === 'card'" class="people"></app-people-card>
 <!-- table view -->
-<app-people-table *ngIf="view == 'table'"></app-people-table>
+<app-people-table *ngIf="view === 'table'" class="people"></app-people-table>

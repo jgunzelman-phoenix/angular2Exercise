@@ -10,21 +10,29 @@ import { timer } from "rxjs";
 })
 export class PeopleCardComponent implements OnInit {
   public people : Person[] = new Array<Person>();
-  public columns = ['ssn', 'first_name', 'last_name', 'dob', 'hair_color', 'height', 'edit', 'delete'];
-
+ 
   constructor(public peopleAPI: PersonService) { }
   ngOnInit() {
     this.startAutoRefresh();
   }
 
   public startAutoRefresh(){
-    var autoTimer = timer(60000, 0);
+    var autoTimer = timer(0, 60000);
     var sub = autoTimer.subscribe(
       t => {
-        this.peopleAPI.getPeople(this.people);
+        this.pullData();
       }
     )
   }
+
+  public pullData(){
+    this.peopleAPI.getPeople().subscribe(
+      (data: Person[]) => 
+      {
+        this.people = data;
+      }
+    )
+  } 
 
   public removePerson(person : Person){
     this.peopleAPI.removePerson(person);

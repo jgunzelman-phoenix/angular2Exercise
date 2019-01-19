@@ -1,7 +1,80 @@
 <mat-toolbar color="primary">
-  <span>Add Person</span>
+  <span *ngIf="update == false">Add Person</span>
+  <span *ngIf="update == true">Update Person</span>
   <span class="spacer"></span>
-  <button mat-icon-button>
+  <button mat-mini-fab (click)="dialogRef.close('cancel')" color="accent">
     <mat-icon>close</mat-icon>
   </button>
 </mat-toolbar>
+  <mat-error class="error" *ngIf="errorText != ''">Error Occured : {{errorText}}</mat-error>
+  <table cellspacing="0" class="add-person-table" style="margin-top: 5px">
+    <tr>
+      <td class="cell">
+        <mat-form-field class="input-person" >
+          <input matInput maxlength="9" placeholder="SSN" [formControl]="ssnController">
+          <mat-error *ngIf="ssnController.hasError('required')">
+            SSN is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+      </td>
+      <td class="cell">
+        <mat-form-field class="input-person" >
+          <input matInput placeholder="First Name" [formControl]="fnController">
+          <mat-error *ngIf="fnController.hasError('required')">
+            First Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+      </td>
+      <td class="cell">
+        <mat-form-field class="input-person" >
+          <input matInput placeholder="Last Name"  [formControl]="lnController">
+          <mat-error *ngIf="lnController.hasError('required')">
+            Last Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell">
+        <mat-form-field class="input-person" >
+          <input matInput [matDatepicker]="picker" placeholder="Date of Birth" [formControl]="dobController">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker (dateInput)="setDOB($event)" (dateChange)="setDOB($event)"></mat-datepicker>
+          <mat-error *ngIf="dobController.hasError('required')">
+            DOB is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+      </td>
+      <td class="cell">
+        <mat-form-field class="input-person" >
+          <input matInput placeholder="Hieght in Inches"  [formControl]="hController">
+          <mat-error *ngIf="hController.hasError('required')">
+            Hieght is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+      </td>
+      <td class="cell">
+        <mat-form-field class="input-person" >
+          <input matInput placeholder="Hair Color" [formControl]="hcController">
+          <mat-error *ngIf="hcController.hasError('required')">
+            Hair Color is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+
+<div>
+  <button mat-raised-button color="primary" style="margin-right: 8px" *ngIf="!update" (click)="addPerson()">
+    <mat-icon style="margin-right: 8px">add</mat-icon>
+    <span>Add</span>
+  </button>
+  <button mat-raised-button color="primary" style="margin-right: 8px" *ngIf="update" (click)="updatePerson()">
+    <mat-icon style="margin-right: 8px">save</mat-icon>
+    <span>Save</span>
+  </button>
+  <button mat-raised-button color="primary" (click)="dialogRef.close('cancel')">
+    <mat-icon style="margin-right: 8px">close</mat-icon>
+    <span>Cancel</span>
+  </button>
+</div>

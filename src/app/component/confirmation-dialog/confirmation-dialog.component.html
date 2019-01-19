@@ -1,0 +1,5 @@
+<mat-toolbar>Are you sure you want to Delete {{person.firstName}} {{person.lastName}}</mat-toolbar>
+<div>
+  <button mat-button-raised color="primary" (click)="deletePerson()">Confirm</button>
+  <button mat-button (click)="dialogRef.close('cancel')">Cancel</button>
+</div>
